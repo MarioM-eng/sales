@@ -1,0 +1,42 @@
+.background {
+    -fx-background-color: #EAEDED;
+}
+
+.button-list {
+    -fx-background-color: #EAEDED;
+    -fx-border-radius: 0px;
+    -fx-cursor: hand;
+}
+
+.button-list:hover {
+    -fx-background-color: #AEB6BF;
+}
+
+.button-create-object {
+    -fx-background-color: #566573;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button-create-object:hover {
+    -fx-background-color: #85929E;
+}
+
+.button-create-object:focus {
+    -fx-color: #85929E;
+}
+
+.button-search {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.general-table {
+    -fx-background-color: transparent;
+}
+
+.text-field {
+    -fx-height: 29px;
+}

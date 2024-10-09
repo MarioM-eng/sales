@@ -1,0 +1,9 @@
+
+	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ø¤˜—¦2J$44988655-f98c-4add-b3fb-d900155326ec
+˜	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸÖê²üÿÿÿÿ8ù¤˜—¦2J$3a771791-78b8-44b2-a5d1-ea5d91a10793
+}
+java:S1118":Add a private constructor to hide the implicit public one.(…ğÃ8¥¥˜—¦2J$ffe4624b-a962-4051-81ee-09e2bf72c588
+u
+java:S61263"2Replace this String concatenation with Text block.(Ëñ8©¥˜—¦2J$94db9139-be16-4faf-acf8-60a72da45ddd
+g
+java:S1128"ERemove this unused import 'jakarta.persistence.EntityManagerFactory'.(‹ ñºûÿÿÿÿ8‚á£Ò¦2

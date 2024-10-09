@@ -1,0 +1,8 @@
+
+
+java:S13010"KReplace this "switch" statement by "if" statements to increase readability.( ÕšË8çûÔ¦2J$37a3344a-888a-4b5c-957b-b0963c9c130e
+›	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ½¾\8çûÔ¦2J$b800aba5-1ccf-4859-80a8-826653ca3517
+‚
+java:S1118":Add a private constructor to hide the implicit public one.(¼Ï¬ùÿÿÿÿ8çûÔ¦2J$441b7e69-ff9b-4173-881f-20496c586e68
+•
+java:S2786"RRemove this redundant "static" qualifier; nested enum types are implicitly static.(«›¿Š8çûÔ¦2J$e21d1795-323b-4c64-801d-dec5de539e34

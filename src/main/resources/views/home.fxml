@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmdevelopment.controllers.HomeController">
+   <children>
+      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menú">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Instituciones" />
+                  <MenuItem mnemonicParsing="false" text="Periodos académicos" />
+                  <MenuItem mnemonicParsing="false" text="Notas" />
+                  <MenuItem mnemonicParsing="false" text="Asignaturas" />
+                  <MenuItem mnemonicParsing="false" text="Estudiantes" />
+                  <MenuItem mnemonicParsing="false" text="Cursos" />
+                  <MenuItem mnemonicParsing="false" text="Cerrar" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.072236727589208" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
+        <items>
+            <VBox spacing="10.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <Button fx:id="btnCourse" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                     <font>
+                        <Font name="Microsoft New Tai Lue" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/courses.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Cursos">
+                                 <font>
+                                    <Font name="Microsoft Tai Le" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSchools" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                     <font>
+                        <Font name="Microsoft New Tai Lue" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/attendance.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Asistencia">
+                                 <font>
+                                    <Font name="Microsoft Tai Le" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSchools1" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                     <font>
+                        <Font name="Microsoft New Tai Lue" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/grades.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Notas">
+                                 <font>
+                                    <Font name="Microsoft Tai Le" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSchools11" layoutX="15.0" layoutY="71.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                     <font>
+                        <Font name="Microsoft New Tai Lue" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/schedule.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Horario">
+                                 <font>
+                                    <Font name="Microsoft Tai Le" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+            <ScrollPane fitToHeight="true" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
