@@ -1,72 +1,61 @@
 package com.mmdevelopment.services;
 
+import com.mmdevelopment.models.daos.DAOImpl;
 import jakarta.persistence.EntityNotFoundException;
 import com.mmdevelopment.models.converters.Converter;
+import lombok.Getter;
 
 import java.util.List;
 
 import static com.mmdevelopment.utils.ServiceTransactionManager.executeInTransaction;
 
-public class BaseService<M,D> implements Service{
+public class BaseService<M> implements Service{
 
     private final Class<M> entityClass;
-    private final Converter<M,D> converter;
+    @Getter
+    private final DAOImpl<M> dao;
 
-    protected BaseService(Class<M> entityClass, Converter<M,D> converter) {
+    public BaseService(Class<M> entityClass, DAOImpl<M> dao) {
         this.entityClass = entityClass;
-        this.converter = converter;
+        this.dao = dao;
     }
 
-    protected Converter<M, D> getConverter() {
-        return converter;
+    public List<M> findAll() {
+        return this.dao.getAll();
     }
 
-    public List<D> findAll() {
-        return executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            return dao.getAll().stream()
-                    .map(converter::entityToDto)
-                    .toList();
-        });
-    }
-
-    public D findById(int id) {
-        return executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            M entity = dao.findById(id);
+    public M findById(int id) {
+        return executeInTransaction((entityManager) -> {
+            M entity = this.dao.findById(id);
             if (entity == null) {
                 throw new EntityNotFoundException("Registro con id " + id + " no fue encontrado.");
             }
-            return converter.entityToDto(dao.findById(id));
+            return this.dao.findById(id);
         });
     }
 
-    public D save(D dto) {
-        return executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            return converter.entityToDto(dao.save(converter.dtoToEntity(dto)));
+    public M save(M entity) {
+        return executeInTransaction((entityManager) -> {
+            return this.dao.save(entity);
         });
     }
 
-    public D create(D entity) {
-        return executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            return converter.entityToDto(dao.create(converter.dtoToEntity(entity)));
+    public M create(M entity) {
+        return executeInTransaction((entityManager) -> {
+            return this.dao.create(entity);
         });
     }
 
-    public void update(D entity) {
-        executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            dao.update(converter.dtoToEntity(entity));
+    public void update(M entity) {
+        executeInTransaction((entityManager) -> {
+            this.dao.update(entity);
             return null;
         });
     }
 
-    public void delete(D entity) {
-        executeInTransaction((entityManager, daoFactory) -> {
-            var dao = daoFactory.createDAO(entityClass);
-            dao.delete(converter.dtoToEntity(entity));
+    public void delete(M entity) {
+        executeInTransaction((entityManager) -> {
+            this.dao.delete(entity);
             return null;
         });
     }

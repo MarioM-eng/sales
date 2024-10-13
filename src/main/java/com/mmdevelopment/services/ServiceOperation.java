@@ -6,5 +6,5 @@ import com.mmdevelopment.utils.factories.DAOFactory;
 
 @FunctionalInterface
 public interface ServiceOperation<T> {
-    T execute(EntityManager em, DAOFactory daoFactory) throws NonexistentEntityException;
+    T execute(EntityManager em) throws NonexistentEntityException;
 }

@@ -1,8 +1,16 @@
 
-
-java:S13010"KReplace this "switch" statement by "if" statements to increase readability.( ÕšË8çûÔ¦2J$37a3344a-888a-4b5c-957b-b0963c9c130e
-›	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ½¾\8çûÔ¦2J$b800aba5-1ccf-4859-80a8-826653ca3517
-‚
-java:S1118":Add a private constructor to hide the implicit public one.(¼Ï¬ùÿÿÿÿ8çûÔ¦2J$441b7e69-ff9b-4173-881f-20496c586e68
-•
-java:S2786"RRemove this redundant "static" qualifier; nested enum types are implicitly static.(«›¿Š8çûÔ¦2J$e21d1795-323b-4c64-801d-dec5de539e34
+r
+java:S3740"/Provide the parametrized type for this generic.(ïßñ®8´ú—Ü§2J$872f041b-a015-4a30-a136-9715c68f7507
+r
+java:S3740"/Provide the parametrized type for this generic.(ïßñ®8´ú—Ü§2J$141456a1-d866-4b1c-82cc-6ca9a63c20fa
+w
+java:S3740r"/Provide the parametrized type for this generic.(üºÃŸúÿÿÿÿ8´ú—Ü§2J$24b4fd21-9b30-4107-98ec-a35465af7874
+q
+java:S3740w"/Provide the parametrized type for this generic.(è¢ÜP8´ú—Ü§2J$3ffa4cf6-ff92-48a8-b6de-75bfd843c991
+“
+java:S1301i"KReplace this "switch" statement by "if" statements to increase readability.(ä·‡­ıÿÿÿÿ8´ú—Ü§2J$3b5d994f-d897-4363-acbd-e7075be64d2c
+›	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ½¾\8´ú—Ü§2J$ebf11f8b-4a15-4b0d-a9bb-590a5b3a372a
+á
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(¼Ï¬ùÿÿÿÿ8Äú—Ü§2J$0de25c49-c18d-4ef1-9275-d265a23c8ac7
+K
+java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8¡Ş‹ã§2

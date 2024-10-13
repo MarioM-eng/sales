@@ -22,22 +22,16 @@
         <menus>
           <Menu mnemonicParsing="false" text="Menú">
             <items>
-              <MenuItem mnemonicParsing="false" text="Instituciones" />
-                  <MenuItem mnemonicParsing="false" text="Periodos académicos" />
-                  <MenuItem mnemonicParsing="false" text="Notas" />
-                  <MenuItem mnemonicParsing="false" text="Asignaturas" />
-                  <MenuItem mnemonicParsing="false" text="Estudiantes" />
-                  <MenuItem mnemonicParsing="false" text="Cursos" />
                   <MenuItem mnemonicParsing="false" text="Cerrar" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.072236727589208" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
+      <SplitPane dividerPositions="0.07884972170686456" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="23.0">
         <items>
             <VBox spacing="10.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Button fx:id="btnCourse" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                  <Button fx:id="btnSales" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="72.0" styleClass="button-list">
                      <font>
                         <Font name="Microsoft New Tai Lue" size="15.0" />
                      </font>
@@ -45,17 +39,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <graphic>
-                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                        <VBox alignment="CENTER" prefHeight="56.0" prefWidth="72.0">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
                                  <image>
-                                    <Image url="@../images/courses.png" />
+                                    <Image url="@../images/cart.png" />
                                  </image>
                               </ImageView>
-                              <Label text="Cursos">
+                              <Label text="Ventas">
                                  <font>
                                     <Font name="Microsoft Tai Le" size="11.0" />
                                  </font>
@@ -64,7 +58,7 @@
                         </VBox>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnSchools" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                  <Button fx:id="btnStocks" mnemonicParsing="false" prefHeight="56.0" prefWidth="72.0" styleClass="button-list">
                      <font>
                         <Font name="Microsoft New Tai Lue" size="15.0" />
                      </font>
@@ -82,10 +76,10 @@
                                     <Rectangle2D />
                                  </viewport>
                                  <image>
-                                    <Image url="@../images/attendance.png" />
+                                    <Image url="@../images/courses.png" />
                                  </image>
                               </ImageView>
-                              <Label text="Asistencia">
+                              <Label text="Existencias">
                                  <font>
                                     <Font name="Microsoft Tai Le" size="11.0" />
                                  </font>
@@ -94,7 +88,7 @@
                         </VBox>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnSchools1" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                  <Button fx:id="btnProducts" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
                      <font>
                         <Font name="Microsoft New Tai Lue" size="15.0" />
                      </font>
@@ -102,44 +96,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <graphic>
-                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+                        <VBox alignment="CENTER" prefHeight="56.0" prefWidth="72.0">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <viewport>
                                     <Rectangle2D />
                                  </viewport>
                                  <image>
-                                    <Image url="@../images/grades.png" />
+                                    <Image url="@../images/dropbox.png" />
                                  </image>
                               </ImageView>
-                              <Label text="Notas">
-                                 <font>
-                                    <Font name="Microsoft Tai Le" size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnSchools11" layoutX="15.0" layoutY="71.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
-                     <font>
-                        <Font name="Microsoft New Tai Lue" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
-                           <children>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                                 <image>
-                                    <Image url="@../images/schedule.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Horario">
+                              <Label text="Productos">
                                  <font>
                                     <Font name="Microsoft Tai Le" size="11.0" />
                                  </font>
@@ -153,7 +120,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </VBox>
-            <ScrollPane fitToHeight="true" />
+            <ScrollPane fx:id="spForChange" fitToHeight="true" />
         </items>
       </SplitPane>
    </children>

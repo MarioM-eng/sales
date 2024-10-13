@@ -47,6 +47,10 @@ build/
 # Maven specific
 .mvn/
 !**/src/main/**/.mvn/wrapper/maven-wrapper.jar
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # Gradle specific
 .gradle/

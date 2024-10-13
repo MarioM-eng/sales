@@ -14,12 +14,11 @@ public class ServiceTransactionManager {
     private ServiceTransactionManager() {}
 
     public static <R> R executeInTransaction(ServiceOperation<R> operation) {
-        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityManager entityManager = JPAUtil.getSession();
         EntityTransaction transaction = entityManager.getTransaction();
-        DAOFactory daoFactory = new DAOFactory(entityManager);
         try {
             transaction.begin();
-            R result = operation.execute(entityManager, daoFactory);
+            R result = operation.execute(entityManager);
             transaction.commit();
             return result;
         } catch (Exception e) {
@@ -31,8 +30,6 @@ public class ServiceTransactionManager {
                     "Error ejecutando operación del servicio",
                     e
             );
-        } finally {
-            entityManager.close();
         }
     }
 

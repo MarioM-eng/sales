@@ -19,7 +19,9 @@ public class Seeder {
 
     private static final List<ModelSeeder> SEEDERLIST = Arrays.asList(
             new ProfileSeeder("1728195367"),
-            new UserSedder("1728236119")
+            new UserSedder("1728236119"),
+            new ProductTypeSeeder("1728531315"),
+            new CategorySeeder("1728562476")
     );
 
     public static void seed() {

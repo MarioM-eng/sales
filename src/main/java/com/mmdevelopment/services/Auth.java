@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Auth {
 
     private EntityManager entityManager;
+    public static User loggedInUser;
 
     public Auth() {
         this.entityManager = JPAUtil.getSession();
@@ -27,6 +28,7 @@ public class Auth {
         if (!Utilities.checkPassword(userLoginDto.getPassword(), user.getPassword())){
             throw new IllegalArgumentException("Contraseña incorrecto");
         }
+        loggedInUser = user;
     }
 
 }

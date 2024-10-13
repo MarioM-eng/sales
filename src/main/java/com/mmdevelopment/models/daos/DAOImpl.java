@@ -1,6 +1,5 @@
 package com.mmdevelopment.models.daos;
 
-import com.mmdevelopment.models.entities.Profile;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -34,19 +33,19 @@ public class DAOImpl<T> implements DAO<T>{
         return em.find(entityClass, entityId) == null;
     }
 
-    public T save(T object) throws NonexistentEntityException {
-        EntityManager em = getEntityManager();
-        if (this.isNew(object)) {
-            this.create(object);
-        } else {
-            this.update(object);
+        public T save(T object) throws NonexistentEntityException {
+            EntityManager em = getEntityManager();
+            if (this.isNew(object)) {
+                object = this.create(object);
+            } else {
+                this.update(object);
+            }
+            return object;
         }
-        em.refresh(object);
-        return object;
-    }
 
     public T create(T object){
         EntityManager em = getEntityManager();
+        em.persist(object);
         em.persist(object);
         em.refresh(object);
         return object;
@@ -99,5 +98,20 @@ public class DAOImpl<T> implements DAO<T>{
             q.setFirstResult(firstResult);
         }
         return q.getResultList();
+    }
+
+    protected List<T> findRecords(String column, String value) {
+
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<T> cq = cb.createQuery(this.entityClass);
+
+        Root<T> root = cq.from(this.entityClass);
+
+        cq.select(root).where(cb.equal(root.get(column), value));
+
+        TypedQuery<T> query = this.entityManager.createQuery(cq);
+
+        return query.getResultList();
     }
 }

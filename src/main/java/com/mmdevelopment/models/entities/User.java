@@ -1,6 +1,8 @@
 package com.mmdevelopment.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,9 +23,12 @@ public class User {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
+    @NotBlank(message = "El nombre de usuario es obligatorio")
     @Column(name = "user_name", nullable = false, length = 45, unique = true)
     private String userName;
 
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Size(min=3, max=1000, message = "La contraseña debe tener al menos 3 caracteres")
     @Column(name = "password", nullable = false, length = 255)
     private String password;
 

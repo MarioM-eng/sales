@@ -1,0 +1,7 @@
+
+z
+java:S1104"XMake loggedInUser a static final constant or non-public and provide accessors if needed.(ê§Áıÿÿÿÿ8ªü½Í§2
+T
+java:S1444"2Make this "public static loggedInUser" field final(ê§Áıÿÿÿÿ8ªü½Í§2
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(¸‘ıºøÿÿÿÿ8³ü½Í§2
