@@ -2,7 +2,6 @@ package com.mmdevelopment.services;
 
 import com.mmdevelopment.models.daos.DAOImpl;
 import jakarta.persistence.EntityNotFoundException;
-import com.mmdevelopment.models.converters.Converter;
 import lombok.Getter;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class BaseService<M> implements Service{
     }
 
     public M findById(int id) {
-        return executeInTransaction((entityManager) -> {
+        return executeInTransaction(entityManager -> {
             M entity = this.dao.findById(id);
             if (entity == null) {
                 throw new EntityNotFoundException("Registro con id " + id + " no fue encontrado.");
@@ -35,27 +34,25 @@ public class BaseService<M> implements Service{
     }
 
     public M save(M entity) {
-        return executeInTransaction((entityManager) -> {
-            return this.dao.save(entity);
-        });
+        return executeInTransaction(entityManager -> this.dao.save(entity));
     }
 
     public M create(M entity) {
-        return executeInTransaction((entityManager) -> {
-            return this.dao.create(entity);
-        });
+        return executeInTransaction(entityManager -> this.dao.create(entity));
     }
 
     public void update(M entity) {
-        executeInTransaction((entityManager) -> {
+        executeInTransaction(entityManager -> {
             this.dao.update(entity);
             return null;
         });
     }
 
-    public void delete(M entity) {
-        executeInTransaction((entityManager) -> {
-            this.dao.delete(entity);
+    public void delete(M... entity) {
+        executeInTransaction(entityManager -> {
+            for (int i = 0; i < entity.length; i++) {
+                this.dao.delete(entity[i]);
+            }
             return null;
         });
     }

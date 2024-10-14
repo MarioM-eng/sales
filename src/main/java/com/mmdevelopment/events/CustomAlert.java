@@ -1,6 +1,9 @@
 package com.mmdevelopment.events;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class CustomAlert {
 
@@ -18,6 +21,13 @@ public class CustomAlert {
         alert.setContentText(message);
         alert.show();
         return alert;
+    }
+
+    public static Optional<ButtonType> showAndWaitAlert(String message, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        return alert.showAndWait();
     }
 
 
