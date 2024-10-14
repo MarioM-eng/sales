@@ -34,7 +34,6 @@ public class DAOImpl<T> implements DAO<T>{
     }
 
         public T save(T object) throws NonexistentEntityException {
-            EntityManager em = getEntityManager();
             if (this.isNew(object)) {
                 object = this.create(object);
             } else {
@@ -46,10 +45,13 @@ public class DAOImpl<T> implements DAO<T>{
     public T create(T object){
         EntityManager em = getEntityManager();
         em.persist(object);
-        em.persist(object);
-        em.refresh(object);
         return object;
 
+    }
+
+    public void create(List<T> objects){
+        EntityManager em = getEntityManager();
+        objects.stream().forEach(em::persist);
     }
 
 
