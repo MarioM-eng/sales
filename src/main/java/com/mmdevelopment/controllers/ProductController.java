@@ -151,6 +151,7 @@ public class ProductController {
                         list.set(list.indexOf(this.product), this.product);
                     }else{
                         list.add(this.product);
+                        this.product = new Product();
                         setFieldsEmpty();
                     }
                 }

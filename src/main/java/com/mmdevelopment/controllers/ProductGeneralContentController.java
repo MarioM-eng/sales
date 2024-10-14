@@ -16,9 +16,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class ProductGeneralContentController {
@@ -37,8 +41,12 @@ public class ProductGeneralContentController {
     @FXML
     private TextField tfSearch;
 
-    ObservableList<Product> data;
-    ProductService productService;
+    private ContextMenu tableContextMenu;
+    private MenuItem menuItemDelete;
+    private MenuItem menuItemUpdate;
+
+    private ObservableList<Product> data;
+    private ProductService productService;
 
 
 
@@ -51,12 +59,12 @@ public class ProductGeneralContentController {
         );
         Views.setListOf(Views.NameOfList.PRODUCT, this.data);
         startTable(this.data);
-        btnCreate.setOnAction(openSaveProductView());
-        tfSearch.setOnKeyReleased(searchProduct());
+        this.btnCreate.setOnAction(openSaveProductView());
+        this.tfSearch.setOnKeyReleased(searchProduct());
     }
 
     private void startTable(ObservableList<Product> data) {
-        ContextMenu contextMenu = generateContextMenu();
+        initTableContextMenu();
 
         TableColumn<Product, String> nameColumn = new TableColumn<>("Nombre");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -75,6 +83,8 @@ public class ProductGeneralContentController {
         );
 
         this.tbList.getColumns().remove(0, this.tbList.getColumns().size());
+        this.tbList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         this.tbList.getColumns().add(codeColumn);
         this.tbList.getColumns().add(nameColumn);
         this.tbList.getColumns().add(CategoryNameColumn);
@@ -87,10 +97,19 @@ public class ProductGeneralContentController {
                     row.setOnMouseClicked(
                         event -> {
                             if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY && row.isSelected()) {
+                                if (this.tbList.getSelectionModel().getSelectedItems().size() > 1) {
+                                    if (this.tableContextMenu.getItems().contains(this.menuItemUpdate)) {
+                                        this.tableContextMenu.getItems().remove(this.menuItemUpdate);
+                                    }
+                                }else {
+                                    if (!this.tableContextMenu.getItems().contains(this.menuItemUpdate)) {
+                                        this.tableContextMenu.getItems().add(this.menuItemUpdate);
+                                    }
+                                }
                                 // Show context menu only if the row is selected and right-clicked
-                                contextMenu.show(row, event.getScreenX(), event.getScreenY());
+                                this.tableContextMenu.show(row, event.getScreenX(), event.getScreenY());
                             } else {
-                                contextMenu.hide(); // Hide the menu if it's not a valid row
+                                this.tableContextMenu.hide(); // Hide the menu if it's not a valid row
                             }
                         }
                     );
@@ -103,7 +122,7 @@ public class ProductGeneralContentController {
         return event -> {
             String name = this.tfSearch.getText();
             data.remove(0, data.size());
-            if (name.equals("")) {
+            if (name.isEmpty()) {
                 data.addAll(this.productService.findAll());
             }else {
                 data.addAll(this.productService.getProductByMatch(name));
@@ -114,11 +133,14 @@ public class ProductGeneralContentController {
     private EventHandler<ActionEvent> openSaveProductView() {
         return event -> {
             Views view = Views.getInstance();
+            Stage stageOwner = view.getCurrentStage();
             try {
                 ProductController controller = new ProductController();
                 view.buildWindow(Views.NameOfViews.SAVE_PRODUCT, controller, "Guardar Producto");
                 view.getCurrentStage().setResizable(false);
                 view.getCurrentStage().setFullScreen(false);
+                view.getCurrentStage().initModality(Modality.WINDOW_MODAL);
+                view.getCurrentStage().initOwner(stageOwner);
                 view.getCurrentStage().showAndWait();
             } catch (IOException e) {
                 log.error("ERROR: {}", String.valueOf(e));
@@ -147,19 +169,21 @@ public class ProductGeneralContentController {
 
     private  EventHandler<ActionEvent> deleteProduct() {
         return event -> {
-            Product product = this.tbList.getSelectionModel().getSelectedItem();
-            this.productService.delete(product);
-            this.data.remove(product);
+            List<Product> products = this.tbList.getSelectionModel().getSelectedItems();
+            Optional<ButtonType> result = CustomAlert.showAndWaitAlert("¿Está seguro que desea eliminar los siguientes productos?", CustomAlert.CONFIRMATION);
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                this.productService.delete(products.toArray(new Product[0]));
+                this.data.removeAll(products);
+            }
         };
     }
 
-    private ContextMenu generateContextMenu() {
-        ContextMenu contextMenu = new ContextMenu();
-        MenuItem menuItem1 = new MenuItem("Editar");
-        menuItem1.setOnAction(openUpdateProductView());
-        MenuItem menuItem2 = new MenuItem("Eliminar");
-        menuItem2.setOnAction(deleteProduct());
-        contextMenu.getItems().addAll(menuItem1, menuItem2);
-        return contextMenu;
+    private void initTableContextMenu() {
+        this.tableContextMenu = new ContextMenu();
+        this.menuItemUpdate = new MenuItem("Editar");
+        this.menuItemUpdate.setOnAction(openUpdateProductView());
+        this.menuItemDelete = new MenuItem("Eliminar");
+        this.menuItemDelete.setOnAction(deleteProduct());
+        this.tableContextMenu.getItems().addAll(this.menuItemUpdate, this.menuItemDelete);
     }
 }
