@@ -40,3 +40,14 @@
 .text-field {
     -fx-height: 29px;
 }
+
+.sub-pane {
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 2px;
+}
+
+.btn-help {
+    -fx-border-radius: 50;
+    -fx-background-color: transparent;
+    -fx-border-color: #d3d3d3;
+}

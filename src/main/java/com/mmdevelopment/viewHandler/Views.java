@@ -1,9 +1,12 @@
 package com.mmdevelopment.viewHandler;
 
+import com.mmdevelopment.controllers.StockController;
+import com.mmdevelopment.events.CustomAlert;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,11 +27,11 @@ public class Views {
     private Stage previousStage;
 
     public enum NameOfViews {
-        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT
+        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK
     }
 
     public enum NameOfList {
-        PRODUCT
+        PRODUCT, STOCK
     }
 
     private Views() {}
@@ -53,6 +56,43 @@ public class Views {
         this.currentStage = new Stage();
         this.currentStage.setScene(scene);
         this.currentStage.setTitle(title);
+    }
+
+    public void showModal(NameOfViews nameOfViews, String title) {
+        Stage stagePrevious = getInstance().getCurrentStage();
+        try {
+            StockController controller = new StockController();
+            buildWindow(nameOfViews, controller, title);
+            getCurrentStage().setResizable(false);
+            getCurrentStage().setFullScreen(false);
+            getCurrentStage().initModality(Modality.WINDOW_MODAL);
+            getCurrentStage().initOwner(stagePrevious);
+            getCurrentStage().showAndWait();
+            this.previousStage = null;
+            this.currentStage = stagePrevious;
+
+        } catch (IOException e) {
+            log.error("ERROR: {}", String.valueOf(e));
+            CustomAlert.showAlert("Ocurrió un error tratando de abrir: " + title, CustomAlert.ERROR);
+        }
+    }
+
+    public void showModal(NameOfViews nameOfViews, String title, Object controller) {
+        Stage stagePrevious = getInstance().getCurrentStage();
+        try {
+            buildWindow(nameOfViews, controller, title);
+            getCurrentStage().setResizable(false);
+            getCurrentStage().setFullScreen(false);
+            getCurrentStage().initModality(Modality.WINDOW_MODAL);
+            getCurrentStage().initOwner(stagePrevious);
+            getCurrentStage().showAndWait();
+            this.previousStage = null;
+            this.currentStage = stagePrevious;
+
+        } catch (IOException e) {
+            log.error("ERROR: {}", String.valueOf(e));
+            CustomAlert.showAlert("Ocurrió un error tratando de abrir: " + title, CustomAlert.ERROR);
+        }
     }
 
     public void closePreviousStage() {
@@ -96,6 +136,14 @@ public class Views {
                 result = "/views/product_save.fxml";
                 break;
             }
+            case STOCK_LIST: {
+                result = "/views/stock_list.fxml";
+                break;
+            }
+            case SAVE_STOCK: {
+                result = "/views/stock_save.fxml";
+                break;
+            }
         }
         return result;
     }
@@ -105,6 +153,10 @@ public class Views {
         switch (nameOfList) {
             case PRODUCT: {
                 result = "product";
+                break;
+            }
+            case STOCK: {
+                result = "stock";
                 break;
             }
         }

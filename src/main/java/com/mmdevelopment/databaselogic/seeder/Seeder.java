@@ -21,7 +21,10 @@ public class Seeder {
             new ProfileSeeder("1728195367"),
             new UserSedder("1728236119"),
             new ProductTypeSeeder("1728531315"),
-            new CategorySeeder("1728562476")
+            new CategorySeeder("1728562476"),
+            new PriceTypeSeeder("1728913010"),
+            new SizeSeeder("1729223587"),
+            new ColorSeeder("1729223670")
     );
 
     public static void seed() {

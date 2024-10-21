@@ -6,6 +6,13 @@
     <persistence-unit name="com.mmdevelopment.databaselogic.myPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <class>com.mmdevelopment.models.entities.Profile</class>
         <class>com.mmdevelopment.models.entities.User</class>
+        <class>com.mmdevelopment.models.entities.ProductType</class>
+        <class>com.mmdevelopment.models.entities.Product</class>
+        <class>com.mmdevelopment.models.entities.Size</class>
+        <class>com.mmdevelopment.models.entities.Color</class>
+        <class>com.mmdevelopment.models.entities.PriceType</class>
+        <class>com.mmdevelopment.models.entities.Price</class>
+        <class>com.mmdevelopment.models.entities.Stock</class>
         <properties>
             <!-- Database connection settings -->
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>

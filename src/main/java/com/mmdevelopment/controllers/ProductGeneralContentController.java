@@ -170,7 +170,11 @@ public class ProductGeneralContentController {
     private  EventHandler<ActionEvent> deleteProduct() {
         return event -> {
             List<Product> products = this.tbList.getSelectionModel().getSelectedItems();
-            Optional<ButtonType> result = CustomAlert.showAndWaitAlert("¿Está seguro que desea eliminar los siguientes productos?", CustomAlert.CONFIRMATION);
+            String selectMessage = (products.size() > 1) ? "los productos" : "el producto";
+            Optional<ButtonType> result = CustomAlert.showAndWaitAlert(
+                    "¿Está seguro que desea eliminar "+ selectMessage + "?",
+                    CustomAlert.CONFIRMATION
+            );
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 this.productService.delete(products.toArray(new Product[0]));
                 this.data.removeAll(products);

@@ -1,16 +1,14 @@
 
 r
-java:S3740"/Provide the parametrized type for this generic.(ïßñ®8´ú—Ü§2J$872f041b-a015-4a30-a136-9715c68f7507
+java:S3740"/Provide the parametrized type for this generic.(ïßñ®8Ÿ †¤ª2J$f014711d-ec24-4dcf-beda-21fafab385b9
 r
-java:S3740"/Provide the parametrized type for this generic.(ïßñ®8´ú—Ü§2J$141456a1-d866-4b1c-82cc-6ca9a63c20fa
-w
-java:S3740r"/Provide the parametrized type for this generic.(üºÃŸúÿÿÿÿ8´ú—Ü§2J$24b4fd21-9b30-4107-98ec-a35465af7874
-q
-java:S3740w"/Provide the parametrized type for this generic.(è¢ÜP8´ú—Ü§2J$3ffa4cf6-ff92-48a8-b6de-75bfd843c991
-“
-java:S1301i"KReplace this "switch" statement by "if" statements to increase readability.(ä·‡­ıÿÿÿÿ8´ú—Ü§2J$3b5d994f-d897-4363-acbd-e7075be64d2c
-›	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ½¾\8´ú—Ü§2J$ebf11f8b-4a15-4b0d-a9bb-590a5b3a372a
+java:S3740"/Provide the parametrized type for this generic.(ïßñ®8Ÿ †¤ª2J$1605b65b-1d3c-4bb1-b926-a85c6090c14f
+x
+java:S3740¦"/Provide the parametrized type for this generic.(üºÃŸúÿÿÿÿ8Ÿ †¤ª2J$1aec0937-0656-4e17-b232-3d823de01ed0
+r
+java:S3740«"/Provide the parametrized type for this generic.(è¢ÜP8Ÿ †¤ª2J$6c02468f-05dd-41ad-be9b-ce0ef82e2e10
+”
+java:S1301™"KReplace this "switch" statement by "if" statements to increase readability.(ä·‡­ıÿÿÿÿ8Ÿ †¤ª2J$8c575145-0664-4fe0-8d74-611fad65a342
+›	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ½¾\8Ÿ †¤ª2J$36ef9903-d372-4c65-b471-7ddcda0709ae
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(¼Ï¬ùÿÿÿÿ8Äú—Ü§2J$0de25c49-c18d-4ef1-9275-d265a23c8ac7
-K
-java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8¡Ş‹ã§2
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(¼Ï¬ùÿÿÿÿ8¯ †¤ª2J$5a943e68-c00c-42f5-a282-4c0058e9a923

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import com.mmdevelopment.utils.exceptions.NonexistentEntityException;
 
@@ -13,15 +14,12 @@ import java.util.List;
 public class DAOImpl<T> implements DAO<T>{
 
     private Class<T> entityClass;
+    @Getter
     private EntityManager entityManager;
 
     public DAOImpl(EntityManager entityManager, Class<T> entityClass) {
         this.entityClass = entityClass;
         this.entityManager = entityManager;
-    }
-
-    protected EntityManager getEntityManager(){
-        return entityManager;
     }
 
     public boolean isNew(T entity) {
@@ -73,9 +71,6 @@ public class DAOImpl<T> implements DAO<T>{
 
     public void delete(T entity) throws NonexistentEntityException {
         EntityManager em = getEntityManager();
-        if (!em.contains(entity)) {
-            throw new NonexistentEntityException("El objeto no está gestionado por el EntityManager");
-        }
         em.remove(em.contains(entity) ? entity : em.merge(entity));
     }
 

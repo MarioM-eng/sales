@@ -1,7 +1,9 @@
 
-	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ø¤˜—¦2J$966f84b8-8ddb-419f-9300-afaecfd48a81
-˜	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸÖê²üÿÿÿÿ8ù¤˜—¦2J$91ac5234-65ba-499c-9a42-6f3ab0db6441
+	java:S112U"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8–¤‡î©2J$0901535e-a7b0-476b-ad30-a60f792b7f8f
+˜	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŸÖê²üÿÿÿÿ8–¤‡î©2J$09bea1b6-f6c7-4ad8-bef8-856af2ac348f
 }
-java:S1118":Add a private constructor to hide the implicit public one.(…ğÃ8¥¥˜—¦2J$9b4f8e4a-76b3-4cc5-95ee-70178ca21376
+java:S1118":Add a private constructor to hide the implicit public one.(…ğÃ8µ¤‡î©2J$38474c81-78ea-4196-a9ad-511227177ffa
 u
-java:S61265"2Replace this String concatenation with Text block.(Ëñ8©¥˜—¦2J$c95af0a5-b9d3-4b19-b454-d60e2ce4e369
+java:S61268"2Replace this String concatenation with Text block.(Ëñ8µ¤‡î©2J$9a874279-4f62-475b-bf9a-26b5196b2f7b
+g
+java:S1128"ERemove this unused import 'jakarta.persistence.EntityManagerFactory'.(‹ ñºûÿÿÿÿ8éµî©2

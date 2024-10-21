@@ -30,7 +30,8 @@ public class HomeController {
     @FXML
     public void initialize() {
         firstView();
-        btnProducts.setOnAction(loadProductView());
+        this.btnProducts.setOnAction(loadProductView());
+        this.btnStocks.setOnAction(loadStockListView());
     }
 
     private void firstView() {
@@ -52,6 +53,19 @@ public class HomeController {
             } catch (IOException e) {
                 log.error(String.valueOf(e));
                 CustomAlert.showAlert("Ocurrió un error tratando de abrir: Contenido general", CustomAlert.ERROR);
+            }
+            this.spForChange.setContent(node);
+        };
+    }
+
+    public EventHandler<ActionEvent> loadStockListView() {
+        return event -> {
+            Node node = null;
+            try {
+                node = Views.getParentNodeOf(Views.NameOfViews.STOCK_LIST, new StockListController());
+            } catch (IOException e) {
+                log.error(String.valueOf(e));
+                CustomAlert.showAlert("Ocurrió un error tratando de abrir: Existencias", CustomAlert.ERROR);
             }
             this.spForChange.setContent(node);
         };
