@@ -50,7 +50,7 @@ public class Stock {
     private Color color;
 
     @NotNull(message = "Todos los precios son obligatorios")
-    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Price> prices;
 
     @Column(name = "created_at")
