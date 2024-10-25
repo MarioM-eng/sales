@@ -65,4 +65,9 @@ public class Stock {
         this.setUpdatedAt(LocalDateTime.now());
         this.setEnabled(true);
     }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.setUpdatedAt(LocalDateTime.now());
+    }
 }

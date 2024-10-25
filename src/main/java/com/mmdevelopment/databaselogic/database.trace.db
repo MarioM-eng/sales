@@ -5183,3 +5183,10 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/USER/Do
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 51 more
+2024-10-25 06:24:43.704282-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "STOCK" no encontrada
+Table "STOCK" not found; SQL statement:
+SELECT * FROM PRICES P
+JOIN STOCK S ON S.ID = P.STOCK_ID
+JOIN PRODUCTS PR ON PR.ID = S.PRODUCT_ID
+WHERE PR.CODE = 123 [42102-224]

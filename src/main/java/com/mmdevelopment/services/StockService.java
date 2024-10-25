@@ -2,8 +2,8 @@ package com.mmdevelopment.services;
 
 import com.mmdevelopment.Validations;
 import com.mmdevelopment.models.daos.StockDao;
-import com.mmdevelopment.models.entities.Price;
-import com.mmdevelopment.models.entities.Stock;
+import com.mmdevelopment.models.entities.*;
+
 import static com.mmdevelopment.utils.ServiceTransactionManager.executeInTransaction;
 
 import java.util.Optional;
@@ -22,19 +22,23 @@ public class StockService extends BaseService<Stock>{
         }
     }
 
+    public Optional<Stock> getCombination(Product product, Color color, Size size) {
+        return product.getStocks()
+            .stream()
+            .filter(
+                    stk -> (stk.getColor().equals(color) && stk.getSize().equals(size))
+            )
+            .findFirst();
+    }
+
     public boolean isValidatedColorAndSizeCombination(Stock stock) {
-        Optional<Stock> stockOptional = stock.getProduct().getStocks()
-                .stream()
-                .filter(
-                    stk -> (stk.getColor().equals(stock.getColor()) && stk.getSize().equals(stock.getSize()))
-                )
-                .findFirst();
-        if (!stockOptional.isEmpty()) {
-            if (stockOptional.get().getId() != stock.getId()) {
-                return false;
-            }
-        }
-        return true;
+        Optional<Stock> stockOptional = getCombination(stock.getProduct(), stock.getColor(), stock.getSize());
+        return  !(
+                !stockOptional.isEmpty()
+                && stockOptional.get().isEnabled()
+                && stockOptional.get().getId() != stock.getId()
+
+        );
     }
 
     public boolean areValidatedThePrices(Stock stock) {
@@ -69,5 +73,27 @@ public class StockService extends BaseService<Stock>{
                     return null;
                 }
         );
+    }
+
+    @Override
+    public Stock save(Stock stock) {
+
+        Optional<Stock> stockOptional = getCombination(stock.getProduct(), stock.getColor(), stock.getSize());
+        Stock replacer;
+
+        if (!stockOptional.isEmpty()) {
+            replacer = stockOptional.get();
+            replacer.setPrices(stock.getPrices());
+            replacer.getPrices().stream().forEach(
+                    price -> price.setStock(replacer)
+            );
+            replacer.setQuantityOnHand(stock.getQuantityOnHand());
+            replacer.setReorderPoint(stock.getReorderPoint());
+            replacer.setEnabled(true);
+        } else {
+            replacer = stock;
+        }
+
+        return executeInTransaction(entityManager -> this.getDao().save(replacer));
     }
 }

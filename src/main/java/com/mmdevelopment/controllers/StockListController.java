@@ -61,8 +61,8 @@ public class StockListController {
     @FXML
     public void initialize() {
         this.lbName.setText("Existencias");
-        services_initialize();
-        list_initializer();
+        servicesInitialize();
+        listInitializer();
 
         startProductTable();
         startStockTable();
@@ -72,12 +72,12 @@ public class StockListController {
         this.tfSearch.setOnKeyReleased(searchProduct());
     }
 
-    private void services_initialize() {
+    private void servicesInitialize() {
         this.productService = new ProductService(new ProductDao(JPAUtil.getSession()));
         this.stockService = new StockService(new StockDao(JPAUtil.getSession()));
     }
 
-    private void list_initializer() {
+    private void listInitializer() {
         this.products = FXCollections.observableArrayList(
                 this.productService.findAll()
         );
@@ -119,7 +119,7 @@ public class StockListController {
         MenuItem menuItemUpdate = new MenuItem("Editar");
         menuItemUpdate.setOnAction(openUpdateStockView());
         MenuItem menuItemDelete = new MenuItem("Eliminar");
-        menuItemDelete.setOnAction(deleteStock());
+        menuItemDelete.setOnAction(disableStock());
         contextMenu.getItems().addAll(menuItemUpdate, menuItemDelete);
 
         this.tbStock.setRowFactory(
@@ -176,15 +176,15 @@ public class StockListController {
         TableColumn<Product, String> codeColumn = new TableColumn<>("Código");
         codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
 
-        TableColumn<Product, String> CategoryNameColumn = new TableColumn<>("Categoría");
-        CategoryNameColumn.setCellValueFactory( cellData ->
+        TableColumn<Product, String> categoryNameColumn = new TableColumn<>("Categoría");
+        categoryNameColumn.setCellValueFactory( cellData ->
                 new SimpleStringProperty(cellData.getValue().getCategory().getName())
         );
 
         this.tbProduct.getColumns().remove(0, this.tbProduct.getColumns().size());
         this.tbProduct.getColumns().add(codeColumn);
         this.tbProduct.getColumns().add(nameColumn);
-        this.tbProduct.getColumns().add(CategoryNameColumn);
+        this.tbProduct.getColumns().add(categoryNameColumn);
         this.tbProduct.setItems(this.products);
 
         this.tbProduct.setOnMouseClicked(whenMouseClickedProduct());
@@ -226,7 +226,7 @@ public class StockListController {
 
     private void setStockTableData() {
         Product product = this.tbProduct.getSelectionModel().getSelectedItem();
-        this.stocks.setAll(product.getStocks().stream().filter(stock -> stock.isEnabled()).toList());
+        this.stocks.setAll(product.getStocks().stream().filter(Stock::isEnabled).toList());
         Views.setListOf(Views.NameOfList.STOCK, this.stocks);
         this.lbStockProduct.setText(product.getName());
     }
@@ -257,7 +257,7 @@ public class StockListController {
         };
     }
 
-    private EventHandler<ActionEvent> deleteStock() {
+    private EventHandler<ActionEvent> disableStock() {
         return event -> {
             List<Stock> stocksSelectionModel = this.tbStock.getSelectionModel().getSelectedItems();
 
