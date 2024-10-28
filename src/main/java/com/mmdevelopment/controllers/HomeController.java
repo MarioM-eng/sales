@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +27,9 @@ public class HomeController {
     private Button btnStocks;
 
     @FXML
+    private Menu mnMain;
+
+    @FXML
     private ScrollPane spForChange;
 
     @FXML
@@ -32,6 +37,27 @@ public class HomeController {
         firstView();
         this.btnProducts.setOnAction(loadProductView());
         this.btnStocks.setOnAction(loadStockListView());
+        initMenu();
+    }
+
+    private void initMenu() {
+        MenuItem sizesItem = new MenuItem("Tamaños");
+        MenuItem colorsItem = new MenuItem("Colores");
+        MenuItem closedItem = new MenuItem("Cerrar");
+
+        colorsItem.setOnAction(event -> {
+            Views.getInstance().showModal(Views.NameOfViews.LITTLE_OBJECTS, "Colores", new ColorController());
+        });
+
+        sizesItem.setOnAction(event -> {
+            Views.getInstance().showModal(Views.NameOfViews.LITTLE_OBJECTS, "Tamaños", new SizeController());
+        });
+
+        closedItem.setOnAction(event -> {
+            System.exit(0);
+        });
+
+        this.mnMain.getItems().setAll(sizesItem, colorsItem, closedItem);
     }
 
     private void firstView() {

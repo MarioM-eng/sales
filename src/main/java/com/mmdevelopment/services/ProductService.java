@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mmdevelopment.utils.ServiceTransactionManager.executeInTransaction;
+
 @Slf4j
 public class ProductService extends BaseService<Product> {
 
@@ -46,6 +48,44 @@ public class ProductService extends BaseService<Product> {
         }
 
         return  false;
+    }
+
+    public boolean exists(String code) {
+        Optional<Product> productOptional = getByCode(code);
+        if (!productOptional.isEmpty()) {
+            return productOptional.get().isEnabled();
+        }
+
+        return false;
+    }
+
+    private Optional<Product> getByCode(String code) {
+        return ((ProductDao) this.getDao()).getByCode(code);
+    }
+
+    public void setEnabled(Product... products) {
+
+        executeInTransaction(
+                entityManager -> {
+                    for (Product product: products) {
+                        if (!exists(product.getCode())) {
+                            throw new IllegalArgumentException(
+                                    "El producto con código "+ product.getCode() +" no existe");
+                        }
+                        if (product.isEnabled()) {
+                            product.setEnabled(false);
+                        } else {
+                            product.setEnabled(true);
+                        }
+                        this.getDao().save(product);
+                    }
+                    return null;
+                }
+        );
+    }
+
+    public List<Product> getEnabled() {
+        return ((ProductDao) this.getDao()).getEnabled();
     }
 
 }

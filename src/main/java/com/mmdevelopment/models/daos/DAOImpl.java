@@ -26,19 +26,19 @@ public class DAOImpl<T> implements DAO<T>{
         EntityManager em = getEntityManager();
         Object entityId = em.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(entity);
         if (entityId == null) {
-            throw new IllegalArgumentException("Entity tiene id nulo.");
+            return true;
         }
         return em.find(entityClass, entityId) == null;
     }
 
-        public T save(T object) throws NonexistentEntityException {
-            if (this.isNew(object)) {
-                object = this.create(object);
-            } else {
-                this.update(object);
-            }
-            return object;
+    public T save(T object) throws NonexistentEntityException {
+        if (this.isNew(object)) {
+            object = this.create(object);
+        } else {
+            this.update(object);
         }
+        return object;
+    }
 
     public T create(T object){
         EntityManager em = getEntityManager();

@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -55,7 +54,7 @@ public class ProductGeneralContentController {
         this.lbName.setText("Productos");
         this.productService = new ProductService(new ProductDao(JPAUtil.getSession()));
         this.data = FXCollections.observableArrayList(
-                this.productService.findAll()
+                this.productService.getEnabled()
         );
         Views.setListOf(Views.NameOfList.PRODUCT, this.data);
         startTable(this.data);
@@ -83,7 +82,6 @@ public class ProductGeneralContentController {
         );
 
         this.tbList.getColumns().remove(0, this.tbList.getColumns().size());
-        this.tbList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         this.tbList.getColumns().add(codeColumn);
         this.tbList.getColumns().add(nameColumn);
@@ -121,11 +119,10 @@ public class ProductGeneralContentController {
     private EventHandler<KeyEvent> searchProduct() {
         return event -> {
             String name = this.tfSearch.getText();
-            data.remove(0, data.size());
             if (name.isEmpty()) {
-                data.addAll(this.productService.findAll());
+                data.setAll(this.productService.getEnabled());
             }else {
-                data.addAll(this.productService.getProductByMatch(name));
+                data.setAll(this.productService.getProductByMatch(name));
             }
         };
     }
@@ -169,15 +166,18 @@ public class ProductGeneralContentController {
 
     private  EventHandler<ActionEvent> deleteProduct() {
         return event -> {
-            List<Product> products = this.tbList.getSelectionModel().getSelectedItems();
-            String selectMessage = (products.size() > 1) ? "los productos" : "el producto";
+            Product product = this.tbList.getSelectionModel().getSelectedItem();
             Optional<ButtonType> result = CustomAlert.showAndWaitAlert(
-                    "¿Está seguro que desea eliminar "+ selectMessage + "?",
+                    "Se eliminará el producto " + product.getName(),
                     CustomAlert.CONFIRMATION
             );
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                this.productService.delete(products.toArray(new Product[0]));
-                this.data.removeAll(products);
+                if (product.getStocks().isEmpty()) {
+                    this.productService.delete(product);
+                } else {
+                    this.productService.setEnabled(product);
+                }
+                this.data.remove(product);
             }
         };
     }

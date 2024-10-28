@@ -21,8 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Comparator;
 import java.util.List;
@@ -30,7 +28,6 @@ import java.util.Optional;
 
 public class StockListController {
 
-    private static final Logger log = LoggerFactory.getLogger(StockListController.class);
     @FXML
     private Button btnCreate;
 
@@ -79,7 +76,7 @@ public class StockListController {
 
     private void listInitializer() {
         this.products = FXCollections.observableArrayList(
-                this.productService.findAll()
+                this.productService.getEnabled()
         );
         Views.setListOf(Views.NameOfList.PRODUCT, this.products);
         this.stocks = FXCollections.observableArrayList();
@@ -261,7 +258,6 @@ public class StockListController {
         return event -> {
             List<Stock> stocksSelectionModel = this.tbStock.getSelectionModel().getSelectedItems();
 
-            log.info("ACA: {}", stocksSelectionModel.get(0));
             String selectMessage = (stocksSelectionModel.size() > 1) ? "las existencias" : "la existencia";
             Optional<ButtonType> result = CustomAlert.showAndWaitAlert(
                     "¿Está seguro que desea eliminar "+ selectMessage + "?",

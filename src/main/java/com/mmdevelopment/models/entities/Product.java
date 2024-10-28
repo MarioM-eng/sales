@@ -46,6 +46,9 @@ public class Product {
     @Column(length = 255)
     private String image;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Stock> stocks;
 

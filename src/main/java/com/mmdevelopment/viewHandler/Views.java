@@ -1,6 +1,5 @@
 package com.mmdevelopment.viewHandler;
 
-import com.mmdevelopment.controllers.StockController;
 import com.mmdevelopment.events.CustomAlert;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 public class Views {
@@ -27,7 +25,7 @@ public class Views {
     private Stage previousStage;
 
     public enum NameOfViews {
-        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK
+        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK, LITTLE_OBJECTS
     }
 
     public enum NameOfList {
@@ -61,8 +59,7 @@ public class Views {
     public void showModal(NameOfViews nameOfViews, String title) {
         Stage stagePrevious = getInstance().getCurrentStage();
         try {
-            StockController controller = new StockController();
-            buildWindow(nameOfViews, controller, title);
+            buildWindow(nameOfViews, title);
             getCurrentStage().setResizable(false);
             getCurrentStage().setFullScreen(false);
             getCurrentStage().initModality(Modality.WINDOW_MODAL);
@@ -142,6 +139,10 @@ public class Views {
             }
             case SAVE_STOCK: {
                 result = "/views/stock_save.fxml";
+                break;
+            }
+            case LITTLE_OBJECTS: {
+                result = "/views/little_general_objects.fxml";
                 break;
             }
         }

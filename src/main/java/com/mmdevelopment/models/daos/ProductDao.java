@@ -1,7 +1,9 @@
 package com.mmdevelopment.models.daos;
 
+import com.mmdevelopment.models.entities.Color;
 import com.mmdevelopment.models.entities.Product;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -44,7 +46,8 @@ public class ProductDao extends DAOImpl<Product>{
                                 cb.function("LOWER", String.class, cb.function("REPLACE", String.class, root.get("code"), cb.literal(" "), cb.literal(""))),
                                 "%"+valueNoSpaces+"%"
                         )
-                )
+                ),
+                cb.equal(root.get("enabled"), true)
         );
 
         TypedQuery<Product> query = this.getEntityManager().createQuery(cq);
@@ -52,4 +55,52 @@ public class ProductDao extends DAOImpl<Product>{
         return query.getResultList();
     }
 
+    public Optional<Product> getByCode(String code) {
+        Product product;
+        String valueNoSpaces = code.replace(" ", "").toLowerCase();
+        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
+
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.select(root).where(
+                cb.equal(
+                        cb.function(
+                                "LOWER",
+                                String.class,
+                                cb.function(
+                                        "REPLACE",
+                                        String.class,
+                                        root.get("code"), cb.literal(" "), cb.literal("")
+                                )
+                        ),
+                        valueNoSpaces
+                )
+        );
+
+        TypedQuery<Product> query = this.getEntityManager().createQuery(cq);
+
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    public List<Product> getEnabled() {
+        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
+
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.select(root).where(
+                cb.equal(root.get("enabled"), true)
+        );
+
+        TypedQuery<Product> query = this.getEntityManager().createQuery(cq);
+
+        return query.getResultList();
+    }
 }
