@@ -20,7 +20,7 @@
    <children>
       <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Menú">
+          <Menu fx:id="mnMain" mnemonicParsing="false" text="Menú">
             <items>
                   <MenuItem mnemonicParsing="false" text="Cerrar" />
             </items>

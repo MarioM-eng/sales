@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class Views {
 
     private static final Views singleton = new Views();
     private static final Map<String, ObservableList> LISTS = new HashMap();
+    private static final Image iconImage = new Image(String.valueOf(Views.class.getResource("/images/logo.png")));
+
     @Getter @Setter
     private Stage currentStage;
     private Stage previousStage;
@@ -45,6 +48,7 @@ public class Views {
         this.currentStage = new Stage();
         this.currentStage.setScene(scene);
         this.currentStage.setTitle(title);
+        this.currentStage.getIcons().add(iconImage);
     }
 
     public void buildWindow(Views.NameOfViews nameOfViews, Object controller,String title) throws IOException {
@@ -54,6 +58,7 @@ public class Views {
         this.currentStage = new Stage();
         this.currentStage.setScene(scene);
         this.currentStage.setTitle(title);
+        this.currentStage.getIcons().add(iconImage);
     }
 
     public void showModal(NameOfViews nameOfViews, String title) {
@@ -67,6 +72,7 @@ public class Views {
             getCurrentStage().showAndWait();
             this.previousStage = null;
             this.currentStage = stagePrevious;
+            this.currentStage.getIcons().add(iconImage);
 
         } catch (IOException e) {
             log.error("ERROR: {}", String.valueOf(e));
@@ -85,6 +91,7 @@ public class Views {
             getCurrentStage().showAndWait();
             this.previousStage = null;
             this.currentStage = stagePrevious;
+            this.currentStage.getIcons().add(iconImage);
 
         } catch (IOException e) {
             log.error("ERROR: {}", String.valueOf(e));

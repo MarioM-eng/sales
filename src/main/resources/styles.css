@@ -1,3 +1,20 @@
+.anchor-pane {
+    -fx-background-color: #ffffff;
+}
+
+.text-field {
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0);
+    -fx-faint-focus-color: transparent;
+}
+
+/* Cambia el color del borde cuando el TextField está enfocado */
+.text-field:focused {
+    -fx-border-color: #d781af;
+    -fx-effect: dropshadow(gaussian, rgba(226, 118, 176, 0.7), 10, 0.3, 0, 0);
+}
+
 .background {
     -fx-background-color: #EAEDED;
 }
@@ -13,7 +30,7 @@
 }
 
 .button-create-object {
-    -fx-background-color: #566573;
+    -fx-background-color: #e276b0;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
@@ -21,7 +38,7 @@
 }
 
 .button-create-object:hover {
-    -fx-background-color: #85929E;
+    -fx-background-color: #d781af;
 }
 
 .button-create-object:focus {
