@@ -68,3 +68,35 @@
     -fx-background-color: transparent;
     -fx-border-color: #d3d3d3;
 }
+
+.button-cancel {
+    -fx-background-color: #e69272;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button-cancel:hover {
+    -fx-background-color: #da977e;
+}
+
+.button-cancel:focused {
+    -fx-color: #f48c64;
+}
+
+.button-save {
+    -fx-background-color: #59caff;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button-save:hover {
+    -fx-background-color: #6ac4ee;
+}
+
+.button-save:focused {
+    -fx-color: #44d1ff;
+}

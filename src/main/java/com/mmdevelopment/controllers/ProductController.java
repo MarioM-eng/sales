@@ -24,14 +24,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
 public class ProductController {
 
-    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     @FXML
     private Button btnSave;
 

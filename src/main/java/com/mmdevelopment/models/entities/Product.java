@@ -56,5 +56,6 @@ public class Product {
     protected void onCreate() {
         this.setCreatedAt(LocalDateTime.now());
         this.setUpdatedAt(LocalDateTime.now());
+        this.setEnabled(true);
     }
 }

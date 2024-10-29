@@ -88,4 +88,9 @@ public class ProductService extends BaseService<Product> {
         return ((ProductDao) this.getDao()).getEnabled();
     }
 
+    public List<Product> getWithStock() {
+        return ((ProductDao) this.getDao()).getEnabled()
+                .stream().filter(product -> !product.getStocks().isEmpty()).toList();
+    }
+
 }

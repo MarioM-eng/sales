@@ -19,7 +19,7 @@ public class ColorSeeder extends ModelSeeder{
                 new Color("Amarillo"),
                 new Color("Azul"),
                 new Color("Rojo"),
-                new Color("Banco"),
+                new Color("Blanco"),
                 new Color("Negro"),
                 new Color("Verde"),
                 new Color("Naranja"),

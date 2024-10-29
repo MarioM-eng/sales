@@ -25,14 +25,15 @@ public class Views {
 
     @Getter @Setter
     private Stage currentStage;
+    @Getter
     private Stage previousStage;
 
     public enum NameOfViews {
-        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK, LITTLE_OBJECTS
+        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK, LITTLE_OBJECTS, MAKE_SALES, SELECT_STOCK
     }
 
     public enum NameOfList {
-        PRODUCT, STOCK
+        PRODUCT, STOCK, SALE_DETAILS
     }
 
     private Views() {}
@@ -152,6 +153,14 @@ public class Views {
                 result = "/views/little_general_objects.fxml";
                 break;
             }
+            case MAKE_SALES: {
+                result = "/views/make_sales.fxml";
+                break;
+            }
+            case SELECT_STOCK: {
+                result = "/views/select_stock.fxml";
+                break;
+            }
         }
         return result;
     }
@@ -165,6 +174,10 @@ public class Views {
             }
             case STOCK: {
                 result = "stock";
+                break;
+            }
+            case SALE_DETAILS: {
+                result = "saleDetails";
                 break;
             }
         }

@@ -37,6 +37,7 @@ public class HomeController {
         firstView();
         this.btnProducts.setOnAction(loadProductView());
         this.btnStocks.setOnAction(loadStockListView());
+        this.btnSales.setOnAction(loadSaleListView());
         initMenu();
     }
 
@@ -63,10 +64,10 @@ public class HomeController {
     private void firstView() {
         Node node = null;
         try {
-            node = Views.getParentNodeOf(Views.NameOfViews.GENERAL_CONTENT);
+            node = Views.getParentNodeOf(Views.NameOfViews.MAKE_SALES, new SaleController());
         } catch (IOException e) {
             log.error(String.valueOf(e));
-            CustomAlert.showAlert("Ocurrió un error tratando de abrir: Contenido general", CustomAlert.ERROR);
+            CustomAlert.showAlert("Ocurrió un error tratando de abrir: Ventas", CustomAlert.ERROR);
         }
         this.spForChange.setContent(node);
     }
@@ -94,6 +95,12 @@ public class HomeController {
                 CustomAlert.showAlert("Ocurrió un error tratando de abrir: Existencias", CustomAlert.ERROR);
             }
             this.spForChange.setContent(node);
+        };
+    }
+
+    public EventHandler<ActionEvent> loadSaleListView() {
+        return event -> {
+            firstView();
         };
     }
 

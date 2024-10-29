@@ -60,4 +60,16 @@ public abstract class AbstractServiceFactory {
         return service;
     }
 
+    public InvoceService getInvoceService() {
+        InvoiceDao dao = new InvoiceDao(entityManager);
+        InvoceService service = new InvoceService(dao);
+        return service;
+    }
+
+    public SalesDetailService getSalesDetailService() {
+        SalesDetailDao dao = new SalesDetailDao(entityManager);
+        SalesDetailService service = new SalesDetailService(dao);
+        return service;
+    }
+
 }

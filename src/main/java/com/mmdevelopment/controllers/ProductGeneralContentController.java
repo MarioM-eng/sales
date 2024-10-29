@@ -172,7 +172,7 @@ public class ProductGeneralContentController {
                     CustomAlert.CONFIRMATION
             );
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (product.getStocks().isEmpty()) {
+                if (product.getStocks() == null || product.getStocks().isEmpty()) {
                     this.productService.delete(product);
                 } else {
                     this.productService.setEnabled(product);

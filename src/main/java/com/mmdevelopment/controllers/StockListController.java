@@ -1,14 +1,12 @@
 package com.mmdevelopment.controllers;
 
-import com.mmdevelopment.databaselogic.JPAUtil;
 import com.mmdevelopment.events.CustomAlert;
-import com.mmdevelopment.models.daos.ProductDao;
-import com.mmdevelopment.models.daos.StockDao;
 import com.mmdevelopment.models.entities.Price;
 import com.mmdevelopment.models.entities.Product;
 import com.mmdevelopment.models.entities.Stock;
 import com.mmdevelopment.services.ProductService;
 import com.mmdevelopment.services.StockService;
+import com.mmdevelopment.utils.factories.H2ServiceFactory;
 import com.mmdevelopment.viewHandler.Views;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,11 +19,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class StockListController {
 
     @FXML
@@ -70,8 +70,8 @@ public class StockListController {
     }
 
     private void servicesInitialize() {
-        this.productService = new ProductService(new ProductDao(JPAUtil.getSession()));
-        this.stockService = new StockService(new StockDao(JPAUtil.getSession()));
+        this.productService = H2ServiceFactory.getInstance().getProductService();
+        this.stockService = H2ServiceFactory.getInstance().getStockService();
     }
 
     private void listInitializer() {
@@ -80,6 +80,7 @@ public class StockListController {
         );
         Views.setListOf(Views.NameOfList.PRODUCT, this.products);
         this.stocks = FXCollections.observableArrayList();
+        Views.setListOf(Views.NameOfList.STOCK, this.stocks);
     }
 
     private void startStockTable() {
@@ -223,9 +224,12 @@ public class StockListController {
 
     private void setStockTableData() {
         Product product = this.tbProduct.getSelectionModel().getSelectedItem();
-        this.stocks.setAll(product.getStocks().stream().filter(Stock::isEnabled).toList());
-        Views.setListOf(Views.NameOfList.STOCK, this.stocks);
-        this.lbStockProduct.setText(product.getName());
+        this.stocks.clear();
+        List<Stock> stockList = product.getStocks();
+        if (stockList != null && !stockList.isEmpty()) {
+            this.stocks.setAll(product.getStocks().stream().filter(Stock::isEnabled).toList());
+            this.lbStockProduct.setText(product.getName());
+        }
     }
 
     private void setStockButtonEnabled() {
