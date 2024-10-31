@@ -18,6 +18,9 @@ import java.io.IOException;
 public class HomeController {
 
     @FXML
+    private Button btnInvoices;
+
+    @FXML
     private Button btnProducts;
 
     @FXML
@@ -38,6 +41,7 @@ public class HomeController {
         this.btnProducts.setOnAction(loadProductView());
         this.btnStocks.setOnAction(loadStockListView());
         this.btnSales.setOnAction(loadSaleListView());
+        this.btnInvoices.setOnAction(loadInvoiceListView());
         initMenu();
     }
 
@@ -101,6 +105,19 @@ public class HomeController {
     public EventHandler<ActionEvent> loadSaleListView() {
         return event -> {
             firstView();
+        };
+    }
+
+    public EventHandler<ActionEvent> loadInvoiceListView() {
+        return event -> {
+            Node node = null;
+            try {
+                node = Views.getParentNodeOf(Views.NameOfViews.INVOICE_LIST, new InvoiceListController());
+            } catch (IOException e) {
+                log.error(String.valueOf(e));
+                CustomAlert.showAlert("Ocurrió un error tratando de abrir: Facturas", CustomAlert.ERROR);
+            }
+            this.spForChange.setContent(node);
         };
     }
 

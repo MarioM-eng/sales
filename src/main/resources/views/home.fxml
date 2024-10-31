@@ -115,6 +115,33 @@
                         </VBox>
                      </graphic>
                   </Button>
+                  <Button fx:id="btnInvoices" layoutX="15.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="71.0" styleClass="button-list">
+                     <font>
+                        <Font name="Microsoft New Tai Lue" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <VBox alignment="CENTER" prefHeight="56.0" prefWidth="72.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                                 <image>
+                                    <Image url="@../images/subject.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Registros">
+                                 <font>
+                                    <Font name="Microsoft Tai Le" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </Button>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -29,7 +29,7 @@ public class Views {
     private Stage previousStage;
 
     public enum NameOfViews {
-        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK, LITTLE_OBJECTS, MAKE_SALES, SELECT_STOCK
+        LOGIN, HOME, GENERAL_CONTENT, SAVE_PRODUCT, STOCK_LIST, SAVE_STOCK, LITTLE_OBJECTS, MAKE_SALES, SELECT_STOCK, INVOICE_LIST
     }
 
     public enum NameOfList {
@@ -159,6 +159,10 @@ public class Views {
             }
             case SELECT_STOCK: {
                 result = "/views/select_stock.fxml";
+                break;
+            }
+            case INVOICE_LIST: {
+                result = "/views/invoice_list.fxml";
                 break;
             }
         }
