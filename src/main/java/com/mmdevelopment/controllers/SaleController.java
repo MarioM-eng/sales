@@ -5,6 +5,7 @@ import com.mmdevelopment.models.entities.*;
 import com.mmdevelopment.services.Auth;
 import com.mmdevelopment.services.InvoceService;
 import com.mmdevelopment.services.ProductService;
+import com.mmdevelopment.services.SalesDetailService;
 import com.mmdevelopment.utils.factories.H2ServiceFactory;
 import com.mmdevelopment.viewHandler.Views;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -59,6 +60,7 @@ public class SaleController {
     private ObservableList<SalesDetail> salesDetails;
     private SimpleDoubleProperty total;
     private InvoceService invoceService;
+    private SalesDetailService salesDetailService;
     private static final String RETAIL_PRICE = "retailPrice";
 
     @FXML
@@ -92,14 +94,7 @@ public class SaleController {
     private void initSaleDetailList() {
         if (!salesDetails.isEmpty()) {
             total.set(
-                tbSale.getItems()
-                        .stream()
-                        .map(
-                                salesDetail -> salesDetail.getStock().getPrices()
-                                    .stream()
-                                    .filter(price -> price.getPriceType().getPrefix().equals(RETAIL_PRICE))
-                                    .findFirst().get().getValue() * salesDetail.getQuantity()
-                        ).mapToDouble(Double::doubleValue).sum()
+                this.salesDetailService.getTotalSaleDetails(tbSale.getItems())
             );
         } else {
             total.set(0);
@@ -111,6 +106,7 @@ public class SaleController {
     private void servicesInitialize() {
         this.productService = H2ServiceFactory.getInstance().getProductService();
         this.invoceService = H2ServiceFactory.getInstance().getInvoceService();
+        this.salesDetailService = H2ServiceFactory.getInstance().getSalesDetailService();
     }
 
     private void listInitializer() {
