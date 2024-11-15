@@ -10,6 +10,7 @@ import java.util.Properties;
 @Slf4j
 public class Config {
     private static final URL PATH_FILE_CONFIGURATION = Config.class.getResource("/config.properties");
+    private static Properties properties = new Properties();
 
     private Config(){}
 
@@ -29,4 +30,20 @@ public class Config {
             return false;
         }
     }
+
+    public static String getOfConfiguration(String property) {
+        String result = "";
+        try {
+            properties.load(new FileInputStream(PATH_FILE_CONFIGURATION.getPath()));
+            result = properties.getProperty(property);
+        } catch (IOException e) {
+            log.error("No se pudo leer el archivo de configuración.");
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            log.error("No se pudo leer el archivo de configuración: verificar ruta");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

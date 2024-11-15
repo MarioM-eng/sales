@@ -1,7 +1,13 @@
 package com.mmdevelopment;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Collection;
+import java.util.Locale;
+
 import org.mindrot.jbcrypt.BCrypt;
+
+import static com.mmdevelopment.Config.getOfConfiguration;
 
 public class Utilities {
 
@@ -32,6 +38,15 @@ public class Utilities {
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         // Check if the plain password matches the hashed password
         return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
+
+    public static String getCurrencyFormat(double value) {
+        BigDecimal amount = BigDecimal.valueOf(value);
+        String language = getOfConfiguration("language");
+        String country = getOfConfiguration("country");
+
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale(language, country));
+        return formatter.format(amount);
     }
 
 }

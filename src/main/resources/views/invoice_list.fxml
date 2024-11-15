@@ -59,22 +59,18 @@
                            </font>
                         </Label>
                         <TableView fx:id="tbInvoices" prefHeight="327.0" prefWidth="456.0" />
-                        <HBox alignment="CENTER_RIGHT">
+                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="330.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="330.0">
-                                 <children>
-                                    <Label text="Total: ">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lbTotal1" prefHeight="70.0" prefWidth="177.0" text="0">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                              <Label text="Total: ">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbTotalPerInvoices" prefHeight="70.0" prefWidth="177.0" text="0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
                      </children>
@@ -102,7 +98,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lbTotal" prefHeight="70.0" prefWidth="177.0" text="0">
+                              <Label fx:id="lbTotalPerDetails" prefHeight="70.0" prefWidth="177.0" text="0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

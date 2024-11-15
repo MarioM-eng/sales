@@ -10,7 +10,7 @@ import static com.mmdevelopment.utils.ServiceTransactionManager.executeInTransac
 
 public class BaseService<M> implements Service{
 
-    private final Class<M> entityClass;
+    private Class<M> entityClass;
     @Getter
     private final DAOImpl<M> dao;
 
@@ -55,6 +55,12 @@ public class BaseService<M> implements Service{
             }
             return null;
         });
+    }
+
+    public void refresh(M... entity) {
+        for (int i = 0; i < entity.length; i++) {
+            this.getDao().getEntityManager().refresh(entity[i]);
+        }
     }
 
 }

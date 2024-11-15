@@ -1,5 +1,6 @@
 package com.mmdevelopment.controllers;
 
+import com.mmdevelopment.Utilities;
 import com.mmdevelopment.events.CustomAlert;
 import com.mmdevelopment.models.entities.*;
 import com.mmdevelopment.services.Auth;
@@ -58,7 +59,7 @@ public class SaleController {
     private ObservableList<Product> products;
     private ProductService productService;
     private ObservableList<SalesDetail> salesDetails;
-    private SimpleDoubleProperty total;
+    private SimpleStringProperty total;
     private InvoceService invoceService;
     private SalesDetailService salesDetailService;
     private static final String RETAIL_PRICE = "retailPrice";
@@ -66,8 +67,8 @@ public class SaleController {
     @FXML
     public void initialize() {
         this.lbName.setText("Ventas");
-        this.total = new SimpleDoubleProperty(0);
-        this.lbTotal.textProperty().bind(this.total.asString("%.2f"));
+        this.total = new SimpleStringProperty("0.0");
+        this.lbTotal.textProperty().bind(this.total);
         servicesInitialize();
         listInitializer();
 
@@ -94,10 +95,10 @@ public class SaleController {
     private void initSaleDetailList() {
         if (!salesDetails.isEmpty()) {
             total.set(
-                this.salesDetailService.getTotalSaleDetails(tbSale.getItems())
+                Utilities.getCurrencyFormat(this.salesDetailService.getTotalSaleDetails(tbSale.getItems()))
             );
         } else {
-            total.set(0);
+            total.set("0.0");
         }
         btnSell.setDisable(salesDetails.isEmpty());
         btnCancel.setDisable(salesDetails.isEmpty());
@@ -308,6 +309,7 @@ public class SaleController {
                 invoice.setSalesDetails(this.tbSale.getItems());
                 invoice.setPay(true);
                 this.invoceService.save(invoice);
+                this.invoceService.refresh(invoice);
                 CustomAlert.showAlert("La venta fue realizada exitosamente", CustomAlert.INFORMATION);
                 this.salesDetails.removeAll(this.salesDetails);
             }
