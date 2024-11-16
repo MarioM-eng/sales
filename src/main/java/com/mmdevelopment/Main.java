@@ -1,9 +1,9 @@
 package com.mmdevelopment;
 
 import com.mmdevelopment.events.CustomAlert;
+import com.mmdevelopment.utils.LicenseValidator;
 import com.mmdevelopment.viewHandler.Views;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import com.mmdevelopment.databaselogic.JPAUtil;
 import com.mmdevelopment.databaselogic.seeder.Seeder;
@@ -18,6 +18,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        try{
+            LicenseValidator licenseValidator = new LicenseValidator();
+            licenseValidator.validate();
+        } catch (IllegalAccessException e) {
+            CustomAlert.showAndWaitAlert(e.getMessage(),CustomAlert.ERROR);
+            System.exit(0);
+        }
+
+
         // Establecer la escena en la ventana principal (Stage)
         Views views = Views.getInstance();
         views.setCurrentStage(primaryStage);
