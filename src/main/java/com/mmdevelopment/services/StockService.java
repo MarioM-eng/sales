@@ -6,6 +6,7 @@ import com.mmdevelopment.models.entities.*;
 
 import static com.mmdevelopment.utils.ServiceTransactionManager.executeInTransaction;
 
+import java.util.List;
 import java.util.Optional;
 
 public class StockService extends BaseService<Stock>{
@@ -23,6 +24,9 @@ public class StockService extends BaseService<Stock>{
     }
 
     public Optional<Stock> getCombination(Product product, Color color, Size size) {
+        if (product.getStocks() == null) {
+            return Optional.empty();
+        }
         return product.getStocks()
             .stream()
             .filter(
@@ -94,6 +98,12 @@ public class StockService extends BaseService<Stock>{
             replacer = stock;
         }
 
-        return executeInTransaction(entityManager -> this.getDao().save(replacer));
+        stock = executeInTransaction(entityManager -> this.getDao().save(replacer));
+        this.getDao().getEntityManager().refresh(stock.getProduct());
+        return stock;
+    }
+
+    public List<Stock> getProductsBelowMinStock() {
+        return ( (StockDao) this.getDao()).getProductsBelowMinStock();
     }
 }

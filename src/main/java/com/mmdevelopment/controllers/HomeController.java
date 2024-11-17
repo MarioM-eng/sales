@@ -1,6 +1,8 @@
 package com.mmdevelopment.controllers;
 
 import com.mmdevelopment.events.CustomAlert;
+import com.mmdevelopment.services.StockService;
+import com.mmdevelopment.utils.factories.H2ServiceFactory;
 import com.mmdevelopment.viewHandler.Views;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +15,8 @@ import javafx.scene.control.ScrollPane;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class HomeController {
@@ -63,6 +67,7 @@ public class HomeController {
         });
 
         this.mnMain.getItems().setAll(sizesItem, colorsItem, closedItem);
+        validateProductStock();
     }
 
     private void firstView() {
@@ -119,6 +124,20 @@ public class HomeController {
             }
             this.spForChange.setContent(node);
         };
+    }
+
+    private void validateProductStock() {
+        StockService service = H2ServiceFactory.getInstance().getStockService();
+        List<String> products = service.getProductsBelowMinStock()
+                .stream()
+                .map(stock -> stock.getProduct().getCode() + " - " + stock.getProduct().getName())
+                .distinct().toList();
+        if (!products.isEmpty()) {
+            CustomAlert.showAndWaitAlert(
+                    "Los siguientes productos tienen las mínimas existencias permitidas: \n" +
+                    products.stream().collect(Collectors.joining("\n")),
+                    CustomAlert.INFORMATION);
+        }
     }
 
 }
