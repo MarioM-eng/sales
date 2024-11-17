@@ -40,23 +40,22 @@ public class LoginController implements Initializable {
 
     public EventHandler<ActionEvent> login() {
         return event -> {
-            String userName = "admin"; //this.tfUserName.getText();
-            String password = "admin1234*";//this.tfPassword.getText();
+            String userName = this.tfUserName.getText();
+            String password = this.tfPassword.getText();
             UserLoginDto userLoginDto = new UserLoginDto(userName, password);
             try{
                 this.auth.login(userLoginDto);
+                Views views = Views.getInstance();
+                views.buildWindow(Views.NameOfViews.HOME, "Home");
+                views.getCurrentStage().show();
+                views.closePreviousStage();
             } catch (IllegalArgumentException err){
                 CustomAlert.showAlert(err.getMessage(), CustomAlert.ERROR);
-            }
-            Views views = Views.getInstance();
-            try {
-                views.buildWindow(Views.NameOfViews.HOME, "Home");
             } catch (IOException e) {
                 log.error(String.valueOf(e));
                 CustomAlert.showAlert("Ocurrió un error tratando de abrir: Home", CustomAlert.ERROR);
             }
-            views.getCurrentStage().show();
-            views.closePreviousStage();
+
 
         };
     }
